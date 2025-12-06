@@ -92,3 +92,85 @@ High-level architecture:
       |              Database (SQLite)                |
       |  - configs table: group, auth_code, data JSON |
       +-----------------------------------------------+
+
+
+
+
+
+Getting Started
+1. Clone and install dependencies
+git clone https://github.com/<yourname>/trade_copier_engine.git
+cd trade_copier_engine
+
+python -m venv venv
+source venv/bin/activate    # Windows: venv\Scripts\activate
+
+pip install -r requirements.txt
+
+2. Configure environment
+
+Copy the example env file:
+
+cp .env.example .env
+
+
+By default it uses a local SQLite database:
+
+DATABASE_URL=sqlite:///./configs.db
+
+3. Prepare configs
+
+Use the example configs under configs/:
+
+cp configs/groupA.example.yml configs/groupA.yml
+cp configs/groupB.example.yml configs/groupB.yml
+
+
+Edit them with your own API keys, ratios and risk settings.
+
+4. Initialize auth codes (optional)
+
+If you want to use auth codes, you can generate some and store them in the DB
+(using the provided script or your own tooling).
+Each auth code is mapped to a group in the configs table.
+
+5. Run the server
+python server.py
+
+
+This will:
+
+load all configs from the database,
+
+start a TradeCopierEngine for each configured group,
+
+start the WSBroker,
+
+start the Flask HTTP API.
+
+Status
+
+Right now this is a self-hosted core engine that is good enough for
+small teams / personal use.
+
+It is NOT a full enterprise-grade trading system (yet).
+
+Possible future work:
+
+PnL-based risk controls (daily loss limits, drawdown limits)
+
+Better monitoring & alerting (Prometheus / Grafana, Telegram alerts)
+
+Optional PostgreSQL / Redis storage backends
+
+High-availability / multi-instance deployment
+
+More tests and CI
+
+If you are interested in improving it, ideas and PRs are welcome.
+
+License
+
+Choose a license you are comfortable with (MIT / Apache-2.0 / etc.) and
+mention it here.
+
