@@ -1,0 +1,29 @@
+# Example config for group B
+exchanges:
+  okx:
+    api_key: GROUPB_OKX_API_KEY
+    api_secret: GROUPB_OKX_API_SECRET
+    passphrase: GROUPB_OKX_PASSPHRASE
+  gate:
+    api_key: GROUPB_GATE_API_KEY
+    api_secret: GROUPB_GATE_API_SECRET
+  binance:
+    api_key: GROUPB_BINANCE_API_KEY
+    api_secret: GROUPB_BINANCE_API_SECRET
+
+settings:
+  source: okx
+
+  target1: binance
+  target1_params:
+    leverage: 15
+    follow_ratio: 1.0
+    tp_ratio: 0.1
+    sl_ratio: 0.05
+
+  target2: gate
+  target2_params:
+    leverage: 10
+    follow_ratio: 0.8
+    tp_ratio: 0.2
+    sl_ratio: 0.1
